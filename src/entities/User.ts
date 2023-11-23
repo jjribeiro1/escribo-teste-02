@@ -4,7 +4,7 @@ export interface User {
   email: string;
   senha: string;
   telefones: Telefone[];
-  ultimo_login: Date;
+  ultimo_login: Date | null;
   data_criacao: Date;
   data_atualizacao: Date;
 }
