@@ -33,8 +33,8 @@ export class UserRepositoryImpl implements IUserRepository {
     return newUser;
   }
 
-  async findById(id: string): Promise<User> {
-    const user = await prisma.user.findUniqueOrThrow({ where: { id }, select: this.userSelect });
+  async findById(id: string): Promise<User | null> {
+    const user = await prisma.user.findUnique({ where: { id }, select: this.userSelect });
     return user;
   }
 }
