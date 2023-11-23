@@ -34,12 +34,35 @@ export class UserRepositoryImpl implements IUserRepository {
   }
 
   async findById(id: string): Promise<User | null> {
-    const user = await prisma.user.findUnique({ where: { id }, select: this.userSelect });
+    const user = await prisma.user.findUnique({
+      where: { id },
+      select: {
+        ...this.userSelect,
+        telefones: {
+          select: {
+            ddd: true,
+            numero: true,
+          },
+        },
+      },
+    });
     return user;
   }
 
   async findByEmail(email: string): Promise<User | null> {
     const user = await prisma.user.findUnique({ where: { email }, select: this.userSelect });
+    return user;
+  }
+
+  async updateUserLastLogin(id: string): Promise<User | null> {
+    const user = await prisma.user.update({
+      where: { id },
+      data: {
+        ultimo_login: new Date(),
+      },
+      select: this.userSelect,
+    });
+
     return user;
   }
 }
