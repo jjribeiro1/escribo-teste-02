@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npx tsc",
     "start": "npm run build && node ./dist/server.js",
-    "dev": "tsnd --respawn ./src/server.ts"
+    "dev": "tsnd --respawn --files ./src/server.ts"
   },
   "keywords": [],
   "author": "",

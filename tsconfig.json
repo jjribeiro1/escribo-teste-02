@@ -10,6 +10,6 @@
     "rootDir": "./src",
     "outDir": "./dist",
     "strictPropertyInitialization": false,
-    "typeRoots": ["types", "./node_modules/@types"]
+    "typeRoots": ["./src/types", "./node_modules/@types"]
   }
 }

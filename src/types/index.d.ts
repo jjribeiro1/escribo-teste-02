@@ -1,9 +1,10 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import express from "express"
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { Request } from 'express';
+
 declare global {
   namespace Express {
     interface Request {
-      userId: string
+      userId?: string;
     }
   }
 }
