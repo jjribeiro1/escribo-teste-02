@@ -1,5 +1,9 @@
-declare namespace Express {
-  interface Request {
-    userId: string | null
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import express from "express"
+declare global {
+  namespace Express {
+    interface Request {
+      userId: string
+    }
   }
 }
