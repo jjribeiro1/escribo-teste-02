@@ -4,6 +4,7 @@ import { SignInOutput } from '../../interfaces/sign-in-output';
 import { IUserRepository } from '../../repository/user-repository-interface';
 import { ICryptographyService } from '../cryptography/cryptography-interface';
 import { ITokenService } from '../token/token-service-interface';
+import { formatDateUTC } from '../../utils/format-date-utc';
 
 export class AuthServiceImpl implements IAuthService {
   constructor(
@@ -30,9 +31,9 @@ export class AuthServiceImpl implements IAuthService {
 
     return {
       id: user.id,
-      data_criacao: user.data_criacao,
-      data_atualizacao: user.data_atualizacao,
-      ultimo_login: new Date(),
+      data_criacao: formatDateUTC(user.data_criacao),
+      data_atualizacao: formatDateUTC(user.data_atualizacao),
+      ultimo_login: formatDateUTC(new Date()),
       token,
     };
   }

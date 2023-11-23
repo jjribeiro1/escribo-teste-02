@@ -4,6 +4,7 @@ import { SignUpOutput } from '../../interfaces/sign-up-output';
 import { IUserRepository } from '../../repository/user-repository-interface';
 import { ICryptographyService } from '../cryptography/cryptography-interface';
 import { ITokenService } from '../token/token-service-interface';
+import { formatDateUTC } from '../../utils/format-date-utc';
 
 export class SignUpServiceImpl implements ISignUpService {
   constructor(
@@ -28,9 +29,9 @@ export class SignUpServiceImpl implements ISignUpService {
 
     return {
       id,
-      data_atualizacao,
-      data_criacao,
-      ultimo_login,
+      data_atualizacao: formatDateUTC(data_atualizacao),
+      data_criacao: formatDateUTC(data_criacao),
+      ultimo_login: formatDateUTC(ultimo_login as Date),
       token,
     };
   }
