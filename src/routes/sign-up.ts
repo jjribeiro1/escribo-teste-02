@@ -4,6 +4,7 @@ import { SignUpServiceImpl } from '../services/sign-up/sign-up-implementation';
 import { UserRepositoryImpl } from '../repository/user-repository-implementation';
 import { CryptographyImpl } from '../services/cryptography/cryptography-implementation';
 import { TokenServiceImpl } from '../services/token/token-service-implementation';
+import { validateSignUpBody } from '../middlewares/validate-sign-up-body';
 
 export const signUpRoute = Router();
 
@@ -13,4 +14,4 @@ const tokenService = new TokenServiceImpl();
 const signUpService = new SignUpServiceImpl(userRepository, cryptographyService, tokenService);
 const signUpController = new SignUpController(signUpService);
 
-signUpRoute.post('/sign-up', signUpController.handler);
+signUpRoute.post('/sign-up', validateSignUpBody, signUpController.handler);
