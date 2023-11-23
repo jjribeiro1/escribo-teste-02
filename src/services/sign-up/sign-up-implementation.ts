@@ -24,14 +24,14 @@ export class SignUpServiceImpl implements ISignUpService {
       senha: await this.cryptography.hasher(data.senha),
     };
     const user = await this.userRepository.create(signUpinput);
-    const { id, data_criacao, data_atualizacao, ultimo_login } = user;
+    const { id, data_criacao, data_atualizacao } = user;
     const token = this.tokenService.generateToken(id);
 
     return {
       id,
       data_atualizacao: formatDateUTC(data_atualizacao),
       data_criacao: formatDateUTC(data_criacao),
-      ultimo_login: formatDateUTC(ultimo_login as Date),
+      ultimo_login: null,
       token,
     };
   }
