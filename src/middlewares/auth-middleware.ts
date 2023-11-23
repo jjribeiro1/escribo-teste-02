@@ -32,7 +32,10 @@ export class AuthMiddleware {
       req.userId = decoded.id;
       next();
     } catch (error) {
-      console.log(error);
+      const errorObject = error as Error;
+      if (errorObject.message === 'jwt expired') {
+        return res.status(401).json({ mensagem: 'Sessão expirada' });
+      }
       return res.status(401).json({ mensagem: 'Não autorizado' });
     }
   };
