@@ -13,6 +13,11 @@ export class SignUpServiceImpl implements ISignUpService {
   ) {}
 
   async execute(data: SignUpInput): Promise<SignUpOutput> {
+    const emailAlreadyExists = await this.userRepository.findByEmail(data.email);
+    if (emailAlreadyExists) {
+      throw new Error('Email já existente');
+    }
+
     const signUpinput = {
       ...data,
       senha: await this.cryptography.hasher(data.senha),
