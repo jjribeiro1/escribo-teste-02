@@ -28,12 +28,13 @@ export class AuthServiceImpl implements IAuthService {
     }
 
     const token = this.tokenService.generateToken(user.id);
+    await this.userRepository.updateUserLastLogin(user.id);
 
     return {
       id: user.id,
       data_criacao: formatDateUTC(user.data_criacao),
       data_atualizacao: formatDateUTC(user.data_atualizacao),
-      ultimo_login: formatDateUTC(new Date()),
+      ultimo_login: formatDateUTC(user.ultimo_login as Date),
       token,
     };
   }
